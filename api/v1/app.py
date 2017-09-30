@@ -22,7 +22,7 @@ host = os.getenv('HBNB_API_HOST', '0.0.0.0')
 port = os.getenv('HBNB_API_PORT', 5000)
 
 # Cross-Origin Resource Sharin
-cors = CORS(app, resources={r"/api/v1/*": {"origins": "*"}})
+CORS(app, resources={r"/api/v1/*": {"origins": "*"}})
 # cors = CORS(app, resources={r'/*': {'origins': host}})
 
 # app_views BluePrint defined in api.v1.views

@@ -6,7 +6,7 @@ window.onload = function () {
   let amenityIdList = [];
   $('INPUT[type=checkbox]').click(function () {
     $(this).each(function () {
-      const len = Object.keys(selected).length;
+      let len = Object.keys(selected).length;
       const _id = $(this)[0]['dataset']['id'];
       const _name = $(this)[0]['dataset']['name'];
       let string = '';
@@ -20,12 +20,17 @@ window.onload = function () {
         const index = amenityIdList.indexOf(_id);
         amenityIdList.splice(index);
       }
-      console.log(amenityIdList.length);
+//      console.log(amenityIdList.length);
       let i = 0;
+      len = Object.keys(selected).length;
+      console.log('len = ' + len);
       for (let key in selected) {
         string = string + selected[key];
-        if (i !== len) {
-          string = string + ', ';
+        console.log('i = ' + i);
+        if (len > 1) {
+          if (i !== (len - 1)) {
+            string = string + ', ';
+          }
         }
         i += 1;
       }

@@ -20,13 +20,10 @@ window.onload = function () {
         const index = amenityIdList.indexOf(_id);
         amenityIdList.splice(index);
       }
-//      console.log(amenityIdList.length);
       let i = 0;
       len = Object.keys(selected).length;
-      console.log('len = ' + len);
       for (let key in selected) {
         string = string + selected[key];
-        console.log('i = ' + i);
         if (len > 1) {
           if (i !== (len - 1)) {
             string = string + ', ';

@@ -9,6 +9,7 @@ window.onload = function () {
       const len = Object.keys(selected).length;
       const _id = $(this)[0]['dataset']['id'];
       const _name = $(this)[0]['dataset']['name'];
+      let string = '';
       //  add
       if ($(this).is(':checked')) {
         selected[_id] = _name;
@@ -19,8 +20,7 @@ window.onload = function () {
         const index = amenityIdList.indexOf(_id);
         amenityIdList.splice(index);
       }
-      let string = '';
-
+      console.log(amenityIdList.length);
       let i = 0;
       for (let key in selected) {
         string = string + selected[key];
@@ -82,7 +82,6 @@ function buildPage (dict) {
         // OWNER (USER)
 //        article.append('<div class="user">');
 //        article.append('<strong>Owner: {{ users[place.user_id] }}</strong>');
-
 //        article.append('</div>');
 
         $('.places').append(article);

@@ -1,24 +1,23 @@
 window.onload = function () {
   console.log('Finished loading!');
-  let selected = {};
-  let amenity_id_list = []
-  $('INPUT[type=checkbox]').click(function () {
+  buildPage({});
 
+  let selected = {};
+  let amenityIdList = [];
+  $('INPUT[type=checkbox]').click(function () {
     $(this).each(function () {
       const len = Object.keys(selected).length;
       const _id = $(this)[0]['dataset']['id'];
       const _name = $(this)[0]['dataset']['name'];
       //  add
       if ($(this).is(':checked')) {
-        console.log('there!!!');
         selected[_id] = _name;
-        amenity_id_list.push(_id);
+        amenityIdList.push(_id);
       } else {
         // delete
-        console.log('HERE!!!');
         delete selected[_id];
-        const index = amenity_id_list.indexOf(_id);
-        amenity_id_list.splice(index);
+        const index = amenityIdList.indexOf(_id);
+        amenityIdList.splice(index);
       }
       let string = '';
 
@@ -51,17 +50,12 @@ window.onload = function () {
     }
   });
 
-  // Place builder
-  buildPage({});
-
-
-// curl -X POST http://0.0.0.0:5001/api/v1/places_search -H "Content-Type: application/json" 
-//-d '{"amenities": ["6f8987f8-7354-4770-8774-4f5e25acb173", "416cddd7-746e-4715-821c-3ad30b9bc3c3"]}'
+// curl -X POST http://0.0.0.0:5001/api/v1/places_search -H "Content-Type: application/json"
+// -d '{"amenities": ["6f8987f8-7354-4770-8774-4f5e25acb173", "416cddd7-746e-4715-821c-3ad30b9bc3c3"]}'
   $('BUTTON').on('click', function () {
     $('.places').empty();
     $('.places').append('<h1>Places</h1>');
-    console.log(amenity_id_list);
-    buildPage({'amenities': amenity_id_list});
+    buildPage({'amenities': amenityIdList});
   });
 };
 
@@ -69,12 +63,10 @@ function buildPage (dict) {
   $.ajax({
     url: 'http://0.0.0.0:5001/api/v1/places_search/',
     type: 'POST',
-    data: JSON.stringify({}),
     dataType: 'json',
     contentType: 'application/json',
     data: JSON.stringify(dict),
     success: function (res) {
-      let count = 0;
       $.each(res, function (k, v) {
         let article = $('<article>');
 
@@ -96,18 +88,17 @@ function buildPage (dict) {
         $('.places').append(article);
       });
     }
-  })
-} 
-
-function getUser(uid, count) {
-  $.ajax({
-    url: 'http:/0.0.0.0:5001/api/v1/users/' + uid,
-    type: 'GET',
-    dataType: 'json',
-    contentType: 'application/json',
-    success: function(res) {
-      console.log('USER: ' + res[count]);
-    }
   });
 }
 
+// function getUser (uid, count) {
+//   $.ajax({
+//    url: 'http:/0.0.0.0:5001/api/v1/users/' + uid,
+//    type: 'GET',
+//    dataType: 'json',
+//    contentType: 'application/json',
+//    success: function (res) {
+//      console.log('USER: ' + res[count]);
+//    }
+//  });
+// }

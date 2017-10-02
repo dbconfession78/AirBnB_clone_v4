@@ -79,16 +79,14 @@ window.onload = function () {
   });
 };
 
-function getUser(uid, count) {
+function getUser (uid, count) {
   $.ajax({
     url: 'http:/0.0.0.0:5001/api/v1/users/' + uid,
     type: 'GET',
     dataType: 'json',
     contentType: 'application/json',
-    success: function(res) {
+    success: function (res) {
       console.log('USER: ' + res[count]);
-
     }
   });
 }
-

@@ -118,6 +118,6 @@ ul {
 
 input[type=checkbox] {
     margin-right: 10px;
-    position: relative;
+/*    position: relative; */
     float: left;
 }

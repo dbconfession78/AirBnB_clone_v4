@@ -52,7 +52,7 @@ window.onload = function () {
     dataType: 'json',
     contentType: 'application/json',
     success: function (res) {
-      let count = 0;
+//      let count = 0;
       $.each(res, function (k, v) {
         let article = $('<article>');
 
@@ -60,7 +60,7 @@ window.onload = function () {
         article.append('<div class="title"><h2>' + v.name + '</h2><div class="price_by_night">$' + v.price_by_night + '</div></div>');
 //        console.log('uid: ' + v.user-id);
         // INFO: max guest, number rooms, number bathrooms
-        article.append('<div class="information"><div class="max_guest"><i class="fa fa-users fa-3x" aria-hidden="true"></i><br />' + v.max_guest + ' Guests</div><div class="number_rooms"><i class="fa fa-bed fa-3x" aria-hidden="true"></i>' + v.number_rooms + ' Bedrooms</div><br /><div class="number_bathrooms"><i class="fa fa-bath fa-3x" aria-hidden="true"></i></br>' + v.number_bathrooms + ' Bathroom</div></div>');
+        article.append('<div class="information"><div class="max_guest"><i class="fa fa-users fa-3x" aria-hidden="true"></i><br />' + v.max_guest + ' Guests</div><div class="number_rooms"><i class="fa fa-bed fa-3x" aria-hidden="true"></i><br />' + v.number_rooms + ' Bedrooms</div><br /><div class="number_bathrooms"><i class="fa fa-bath fa-3x" aria-hidden="true"></i></br>' + v.number_bathrooms + ' Bathroom</div></div>');
 
         // DESCRIPTION
         article.append('<div class="description">' + v.description + '</div>');
@@ -71,22 +71,22 @@ window.onload = function () {
 //        article.append('</div>');
 
         $('.places').append(article);
-        const user = getUser(v.user_id, count);
-        console.log('USER: ' + user);
-        count += 1;
+//        const user = getUser(v.user_id, count);
+//        console.log('USER: ' + user);
+//        count += 1;
       });
     }
   });
 };
 
-function getUser (uid, count) {
-  $.ajax({
-    url: 'http:/0.0.0.0:5001/api/v1/users/' + uid,
-    type: 'GET',
-    dataType: 'json',
-    contentType: 'application/json',
-    success: function (res) {
-      console.log('USER: ' + res[count]);
-    }
-  });
-}
+// function getUser (uid, count) {
+//  $.ajax({
+//    url: 'http:/0.0.0.0:5001/api/v1/users/' + uid,
+//    type: 'GET',
+//    dataType: 'json',
+//    contentType: 'application/json',
+//    success: function (res) {
+//      console.log('USER: ' + res[count]);
+//    }
+//  });
+// }

@@ -176,7 +176,7 @@ function buildPage (dict) {
         article.append('<div class="title"><h2>' + v.name + '</h2><div class="price_by_night">$' + v.price_by_night + '</div></div>');
 
         // INFO: max guest, number rooms, number bathrooms
-        article.append('<div class="information"><div class="max_guest"><i class="fa fa-users fa-3x" aria-hidden="true"></i><br />' + v.max_guest + ' Guests</div><div class="number_rooms"><i class="fa fa-bed fa-3x" aria-hidden="true"></i>' + v.number_rooms + ' Bedrooms</div><br /><div class="number_bathrooms"><i class="fa fa-bath fa-3x" aria-hidden="true"></i></br>' + v.number_bathrooms + ' Bathroom</div></div>');
+        article.append('<div class="information"><div class="max_guest"><i class="fa fa-users fa-3x" aria-hidden="true"></i><br />' + v.max_guest + ' Guests</div><div class="number_rooms"><i class="fa fa-bed fa-3x" aria-hidden="true"></i><br />' + v.number_rooms + ' Bedrooms</div><br /><div class="number_bathrooms"><i class="fa fa-bath fa-3x" aria-hidden="true"></i><br />' + v.number_bathrooms + ' Bathroom</div></div>');
 
         // DESCRIPTION
         article.append('<div class="description">' + v.description + '</div>');

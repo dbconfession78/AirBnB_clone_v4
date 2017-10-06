@@ -1,9 +1,6 @@
 let locIds = [];
 let locNames = [];
-let test = [];
 window.onload = function () {
-//  getCitiesByState('bbee73a7-2f71-47e6-938a-2d9e932d4ff9');
-//  return;
   console.log('Finished loading!');
   buildPage({});
 
@@ -35,47 +32,47 @@ window.onload = function () {
     let i = 0;
     len = locIds.length;
     for (let key in locNames) {
-          string = string + locNames[key];
-          if (len > 1) {
-            if (i !== (len - 1)) {
-              string = string + ', ';
-            }
-          }
-          i += 1;
+      string = string + locNames[key];
+      if (len > 1) {
+        if (i !== (len - 1)) {
+          string = string + ', ';
         }
-        $('DIV.locations h4').text(string);
+      }
+      i += 1;
+    }
+    $('DIV.locations h4').text(string);
   });
 
   // amenitiy checkbox action performed
   $('.amenities INPUT[type=checkbox]').click(function () {
-      $(this).each(function () {
-        let len = Object.keys(selected).length;
-        const _id = $(this)[0]['dataset']['id'];
-        const _name = $(this)[0]['dataset']['name'];
-        let string = '';
+    $(this).each(function () {
+      let len = Object.keys(selected).length;
+      const _id = $(this)[0]['dataset']['id'];
+      const _name = $(this)[0]['dataset']['name'];
+      let string = '';
         //  add
-        if ($(this).is(':checked')) {
-          selected[_id] = _name;
-          amenityIds.push(_id);
-        } else {
+      if ($(this).is(':checked')) {
+        selected[_id] = _name;
+        amenityIds.push(_id);
+      } else {
           // delete
-          delete selected[_id];
-          const index = amenityIds.indexOf(_id);
-          amenityIds.splice(index);
-        }
-        let i = 0;
-        len = Object.keys(selected).length;
-        for (let key in selected) {
-          string = string + selected[key];
-          if (len > 1) {
-            if (i !== (len - 1)) {
-              string = string + ', ';
-            }
+        delete selected[_id];
+        const index = amenityIds.indexOf(_id);
+        amenityIds.splice(index);
+      }
+      let i = 0;
+      len = Object.keys(selected).length;
+      for (let key in selected) {
+        string = string + selected[key];
+        if (len > 1) {
+          if (i !== (len - 1)) {
+            string = string + ', ';
           }
-          i += 1;
         }
-        $('DIV.amenities h4').text(string);
-      });
+        i += 1;
+      }
+      $('DIV.amenities h4').text(string);
+    });
   });
 
   // api status indicator
@@ -104,10 +101,9 @@ window.onload = function () {
   });
 };
 
-
 function selectStateCities (stateId, shouldSelect) {
   const locBoxes = $('.locations INPUT[type=checkbox]');
-  for (let i=0; i < locBoxes.length; i++) {
+  for (let i = 0; i < locBoxes.length; i++) {
     if (locBoxes[i]['dataset']['state_id'] === stateId) {
       if (shouldSelect) {
         locBoxes[i].checked = true;
@@ -116,9 +112,9 @@ function selectStateCities (stateId, shouldSelect) {
         locBoxes[i].checked = false;
         locBoxes[i].disabled = false;
       }
-      const name = locBoxes[i]['dataset']['name'];
-      const id = locBoxes[i]['dataset']['id']
-      let index = locNames.indexOf(name);
+//      const name = locBoxes[i]['dataset']['name'];
+//      const id = locBoxes[i]['dataset']['id'];
+//      let index = locNames.indexOf(name);
 //      locNames.splice(index);
 //      index = locIds.indexOf(id);
 //      locIds.splice(index);
@@ -126,29 +122,29 @@ function selectStateCities (stateId, shouldSelect) {
   }
 }
 
-function isStateCheckbox(cb) {
-    const state_id = $(cb)[0]['dataset']['state_id'];
+function isStateCheckbox (cb) {
+  const stateId = $(cb)[0]['dataset']['state_id'];
 //    console.log('state_id: ' + state_id);
-    if (state_id === undefined) {
-      return true;
-    }
-    return false;
+  if (stateId === undefined) {
+    return true;
+  }
+  return false;
 }
 
 function buildPage (dict) {
-    let users = {};
-    $.ajax({
-      async: false,
-      url: 'http://0.0.0.0:5001/api/v1/users/',
-      type: 'GET',
-      dataType: 'json',
-      contentType: 'application/json',
-      success: function (res) {
-        for (i in res) {
-          users[res[i]['id']] = res[i]['first_name'] + ' ' + res[i]['last_name'];
-        }
+  let users = {};
+  $.ajax({
+    async: false,
+    url: 'http://0.0.0.0:5001/api/v1/users/',
+    type: 'GET',
+    dataType: 'json',
+    contentType: 'application/json',
+    success: function (res) {
+      for (let i in res) {
+        users[res[i]['id']] = res[i]['first_name'] + ' ' + res[i]['last_name'];
       }
-    });
+    }
+  });
   $.ajax({
     async: false,
     url: 'http://0.0.0.0:5001/api/v1/places_search/',
@@ -170,7 +166,7 @@ function buildPage (dict) {
         article.append('<div class="description">' + v.description + '</div>');
 
         // OWNER (USER)
-        article.append('<div class="user"><strong>Owner: ' + users[v.user_id]+ '</strong>');
+        article.append('<div class="user"><strong>Owner: ' + users[v.user_id] + '</strong>');
         article.append('</div>');
         $('.places').append(article);
       });

@@ -1,5 +1,6 @@
 let locIds = [];
 let locNames = [];
+let test = [];
 window.onload = function () {
 //  getCitiesByState('bbee73a7-2f71-47e6-938a-2d9e932d4ff9');
 //  return;
@@ -75,7 +76,7 @@ window.onload = function () {
         }
         $('DIV.amenities h4').text(string);
       });
-  });  
+  });
 
   // api status indicator
   $.ajax({
@@ -103,33 +104,6 @@ window.onload = function () {
   });
 };
 
-
-function getCitiesByState(stateId) {
-   $.ajax({
-     url: 'http://0.0.0.0:5001/api/v1/states/' + stateId + '/cities/',
-     type: 'GET',
-     dataType: 'json',
-     contentType: 'application/json',
-//     data: JSON.stringify({}),
-     success: function (res) {
-       console.log(res);
-     }
-  });
-}
-
-
-function getStates() {
-   $.ajax({
-     url: 'http://0.0.0.0:5001/api/v1/states/',
-     type: 'GET',
-     dataType: 'json',
-     contentType: 'application/json',
-//     data: JSON.stringify({}),
-     success: function (res) {
-       console.log(res);
-     }
-  });
-}
 
 function selectStateCities (stateId, shouldSelect) {
   const locBoxes = $('.locations INPUT[type=checkbox]');
@@ -162,7 +136,21 @@ function isStateCheckbox(cb) {
 }
 
 function buildPage (dict) {
+    let users = {};
+    $.ajax({
+      async: false,
+      url: 'http://0.0.0.0:5001/api/v1/users/',
+      type: 'GET',
+      dataType: 'json',
+      contentType: 'application/json',
+      success: function (res) {
+        for (i in res) {
+          users[res[i]['id']] = res[i]['first_name'] + ' ' + res[i]['last_name'];
+        }
+      }
+    });
   $.ajax({
+    async: false,
     url: 'http://0.0.0.0:5001/api/v1/places_search/',
     type: 'POST',
     dataType: 'json',
@@ -182,24 +170,10 @@ function buildPage (dict) {
         article.append('<div class="description">' + v.description + '</div>');
 
         // OWNER (USER)
-//        article.append('<div class="user">');
-//        article.append('<strong>Owner: {{ users[place.user_id] }}</strong>');
-//        article.append('</div>');
-
+        article.append('<div class="user"><strong>Owner: ' + users[v.user_id]+ '</strong>');
+        article.append('</div>');
         $('.places').append(article);
       });
     }
   });
 }
-
-// function getUser (uid, count) {
-//   $.ajax({
-//    url: 'http:/0.0.0.0:5001/api/v1/users/' + uid,
-//    type: 'GET',
-//    dataType: 'json',
-//    contentType: 'application/json',
-//    success: function (res) {
-//      console.log('USER: ' + res[count]);
-//    }
-//  });
-// }

@@ -19,7 +19,9 @@ app.url_map.strict_slashes = False
 
 # flask server environmental setup
 host = os.getenv('HBNB_API_HOST', '0.0.0.0')
-port = os.getenv('HBNB_API_PORT', 5000)
+port = os.getenv('HBNB_API_PORT', 8001)
+
+#input('test: {}'.format(os.getenv('SERVER_ENV')))
 
 # Cross-Origin Resource Sharin
 CORS(app, resources={r"/api/v1/*": {"origins": "*"}})

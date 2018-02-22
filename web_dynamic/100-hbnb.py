@@ -9,7 +9,7 @@ import uuid
 # flask setup
 app = Flask(__name__)
 app.url_map.strict_slashes = False
-port = 5000
+port = 8002
 host = '0.0.0.0'
 
 
@@ -22,7 +22,7 @@ def teardown_db(exception):
     """
     storage.close()
 
-
+@app.route('/', strict_slashes=False)
 @app.route('/100-hbnb/', strict_slashes=False)
 def hbnb_filters(the_id=None):
     """

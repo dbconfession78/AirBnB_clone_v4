@@ -1,5 +1,6 @@
 let locIds = [];
 let locNames = [];
+const api_port = 8001
 window.onload = function () {
   console.log('Finished loading!');
   buildPage({});
@@ -77,7 +78,7 @@ window.onload = function () {
 
   // api status indicator
   $.ajax({
-    url: 'http://0.0.0.0:5001/api/v1/status/',
+    url: 'http://0.0.0.0:' + api_port + '/api/v1/status/',
     type: 'GET',
     dataType: 'json',
     success: function (res) {
@@ -135,7 +136,7 @@ function buildPage (dict) {
   let users = {};
   $.ajax({
     async: false,
-    url: 'http://0.0.0.0:5001/api/v1/users/',
+    url: 'http://0.0.0.0:' + api_port + '/api/v1/users/',
     type: 'GET',
     dataType: 'json',
     contentType: 'application/json',
@@ -147,7 +148,7 @@ function buildPage (dict) {
   });
   $.ajax({
     async: false,
-    url: 'http://0.0.0.0:5001/api/v1/places_search/',
+    url: 'http://0.0.0.0:' + api_port + '/api/v1/places_search/',
     type: 'POST',
     dataType: 'json',
     contentType: 'application/json',

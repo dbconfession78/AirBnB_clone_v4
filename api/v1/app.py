@@ -19,7 +19,7 @@ app.url_map.strict_slashes = False
 
 # flask server environmental setup
 host = os.getenv('HBNB_API_HOST', '0.0.0.0')
-port = os.getenv('HBNB_API_PORT', 8001)
+port = int(os.getenv('HBNB_API_PORT', 8001))
 
 #input('test: {}'.format(os.getenv('SERVER_ENV')))
 

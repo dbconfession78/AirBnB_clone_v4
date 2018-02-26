@@ -137,6 +137,7 @@ function buildPage (dict) {
   $.ajax({
     async: false,
     url: 'http://0.0.0.0:' + api_port + '/api/v1/users/',
+//    url: '/api/v1/users/',
     type: 'GET',
     dataType: 'json',
     contentType: 'application/json',
